@@ -1,6 +1,27 @@
-/** @type {import('next').NextConfig} */
-const nextConfig = {
-  reactStrictMode: true,
-}
+const { PHASE_DEVELOPMENT_SERVER } = require("next/constants");
 
-module.exports = nextConfig
+/** @type {import('next').NextConfig} */
+const nextConfig = (phase) => {
+  if (phase === PHASE_DEVELOPMENT_SERVER) {
+    return {
+      reactStrictMode: true,
+      env: {
+        mongodb_username: "dbUser",
+        mongodb_password: "Joshuakoh042345",
+        mongodb_clusterName: "cluster0",
+        mongodb_database: "jk-blog",
+      },
+    };
+  }
+
+  return {
+    env: {
+      mongodb_username: "dbUser",
+      mongodb_password: "Joshuakoh042345",
+      mongodb_clusterName: "cluster0",
+      mongodb_database: "jkblog",
+    },
+  };
+};
+
+module.exports = nextConfig;
